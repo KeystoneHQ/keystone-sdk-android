@@ -1,14 +1,14 @@
 # keystone-sdk-android
 
-[![Release](https://jitpack.io/v/jitpack/android-example.svg)](https://jitpack.io/#jitpack/android-example)
+[![Release](https://jitpack.io/v/KeystoneHQ/keystone-sdk-android.svg)](https://jitpack.io/#KeystoneHQ/keystone-sdk-android)
 
-Example Android library project that works with jitpack.io.
+KeystoneSDK Android library project that works with jitpack.io.
 
 See this [Tutorial](https://medium.com/@ome450901/publish-an-android-library-by-jitpack-a0342684cbd0) on how to publish an Android Library with JitPack.
 
 For more details check out the [documentation](https://github.com/jitpack/jitpack.io/blob/master/ANDROID.md)
 
-https://jitpack.io/#jitpack/android-example
+https://jitpack.io/#KeystoneHQ/keystone-sdk-android
 
 Add it to your build.gradle with:
 ```gradle
@@ -22,7 +22,7 @@ and:
 
 ```gradle
 dependencies {
-    compile 'com.github.jitpack:android-example:{latest version}'
+    compile 'com.github.KeystoneHQ/keystone-sdk-android:{latest version}'
 }
 ```
 
