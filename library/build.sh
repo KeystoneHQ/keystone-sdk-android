@@ -7,7 +7,7 @@ if command -v rustc >/dev/null 2>&1; then
   echo 'rustc exists'
 else
   # download NDK
-  wget https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
+  wget -q https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
   unzip -q android-ndk-r25c-linux.zip
   export ANDROID_NDK_HOME=$current_dir/android-ndk-r25c
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -17,9 +17,9 @@ else
 fi
 
 # build rust
-cd ./keystone-sdk-rust
+cd ./keystone-sdk-rust || exit
 make
-cd "$current_dir"
+cd "$current_dir" || exit
 
 # copy
 mkdir -p ./src/main/jniLibs
