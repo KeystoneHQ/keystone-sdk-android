@@ -6,12 +6,18 @@ import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
 open class KeystoneSDK {
-    public fun encodeQR(type: String, cbor: String, maxFragmentLen: Int = 100, minFragmentLen: Int = 10): UREncoder {
-        val ur = UR.fromBytes(type, cbor.toByteArray());
-        return UREncoder(ur, maxFragmentLen, minFragmentLen, 0)
+    private var maxFragmentLen: Int = 100
+
+    public fun setMaxFragmentLen(maxFragmentLen: Int) {
+        this.maxFragmentLen = maxFragmentLen
     }
 
-    public fun <T>handleError(jsonStr: String, data: T): T{
+    protected fun encodeQR(type: String, cbor: String): UREncoder {
+        val ur = UR.fromBytes(type, cbor.toByteArray());
+        return UREncoder(ur, this.maxFragmentLen, 10, 0)
+    }
+
+    protected fun <T>handleError(jsonStr: String, data: T): T{
         val result = Gson().fromJson<KeystoneError>(jsonStr, KeystoneError::class.java)
         if (result.error != null) {
             throw Exception(result.error)
