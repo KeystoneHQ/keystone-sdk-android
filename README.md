@@ -18,8 +18,17 @@ allprojects {
     }
 }
 ```
-and:
 
+or add it to your settings.gradle with:
+```gradle
+dependencyResolutionManagement {
+    repositories {
+        maven { url 'https://www.jitpack.io' }
+    }
+}
+```
+
+then add dependency:
 ```gradle
 dependencies {
     compile 'com.github.KeystoneHQ/keystone-sdk-android:{latest version}'
