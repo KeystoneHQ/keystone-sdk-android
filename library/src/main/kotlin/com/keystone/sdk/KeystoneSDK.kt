@@ -5,6 +5,13 @@ import com.keystone.module.KeystoneError
 import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
+fun String.decodeHex(): ByteArray {
+    check(length % 2 == 0) { "Must have an even length" }
+    return chunked(2)
+        .map { it.toInt(16).toByte() }
+        .toByteArray()
+}
+
 open class KeystoneSDK {
     private var maxFragmentLen: Int = 100
 
@@ -13,7 +20,7 @@ open class KeystoneSDK {
     }
 
     protected fun encodeQR(type: String, cbor: String): UREncoder {
-        val ur = UR.fromBytes(type, cbor.toByteArray());
+        val ur = UR(type, cbor.decodeHex())
         return UREncoder(ur, this.maxFragmentLen, 10, 0)
     }
 
