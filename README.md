@@ -48,9 +48,10 @@ To enable installing into local maven repository and JitPack you need to add the
 2. Add `com.github.dcendents.android-maven` to the library/build.gradle
 
 After these changes you should be able to run:
+```shell
+./gradlew install
+```
 
-    ./gradlew install
-    
 from the root of your project. If install works and you have added a GitHub release it should work on jitpack.io
 
 ## Adding a sample app 
@@ -58,7 +59,7 @@ from the root of your project. If install works and you have added a GitHub rele
 If you add a sample app to the same repo then your app needs to have a dependency on the library. To do this in your app/build.gradle add:
 
 ```gradle
-    dependencies {
-        compile project(':library')
-    }
+dependencies {
+    compile project(':library')
+}
 ```
