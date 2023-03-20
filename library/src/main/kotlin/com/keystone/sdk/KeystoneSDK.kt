@@ -5,15 +5,15 @@ import com.keystone.module.KeystoneError
 import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
-fun String.decodeHex(): ByteArray {
-    check(length % 2 == 0) { "Must have an even length" }
-    return chunked(2)
-        .map { it.toInt(16).toByte() }
-        .toByteArray()
-}
-
 open class KeystoneSDK {
     private var maxFragmentLen: Int = 100
+
+    private fun String.decodeHex(): ByteArray {
+        check(length % 2 == 0) { "HexString must have an even length" }
+        return chunked(2)
+            .map { it.toInt(16).toByte() }
+            .toByteArray()
+    }
 
     public fun setMaxFragmentLen(maxFragmentLen: Int) {
         this.maxFragmentLen = maxFragmentLen
