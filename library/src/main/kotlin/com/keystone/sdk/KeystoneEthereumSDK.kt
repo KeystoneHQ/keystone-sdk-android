@@ -26,8 +26,8 @@ class KeystoneEthereumSDK: KeystoneSDK() {
         chainId: Int,
         path: String,
         xfp: String,
-        address: String,
-        origin: String,
+        address: String = "",
+        origin: String = "",
     ): UREncoder {
         val jsonStr = super.generateETHSignRequest(requestId, signData, dataType.value, chainId, path, xfp, address, origin)
         val result = super.handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))

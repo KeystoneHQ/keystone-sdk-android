@@ -22,9 +22,9 @@ class KeystoneSolanaSDK : KeystoneSDK() {
         signData: String,
         path: String,
         xfp: String,
-        address: String,
-        origin: String,
-        signType: SignType
+        address: String = "",
+        origin: String = "",
+        signType: SignType,
     ): UREncoder {
         val jsonStr = super.generateSolSignRequest(requestId, signData, path, xfp, address, origin, signType.value)
         val result = super.handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
