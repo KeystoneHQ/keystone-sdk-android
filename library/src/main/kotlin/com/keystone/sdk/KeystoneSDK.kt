@@ -8,12 +8,19 @@ import com.sparrowwallet.hummingbird.UREncoder
 open class KeystoneSDK {
     private var maxFragmentLen: Int = 100
 
+    private fun String.decodeHex(): ByteArray {
+        check(length % 2 == 0) { "HexString must have an even length" }
+        return chunked(2)
+            .map { it.toInt(16).toByte() }
+            .toByteArray()
+    }
+
     public fun setMaxFragmentLen(maxFragmentLen: Int) {
         this.maxFragmentLen = maxFragmentLen
     }
 
     protected fun encodeQR(type: String, cbor: String): UREncoder {
-        val ur = UR.fromBytes(type, cbor.toByteArray());
+        val ur = UR(type, cbor.decodeHex())
         return UREncoder(ur, this.maxFragmentLen, 10, 0)
     }
 
