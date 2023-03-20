@@ -34,6 +34,8 @@ open class KeystoneSDK {
 
     protected external fun parseSolSignature(cbor: String): String
     protected external fun generateSolSignRequest(requestId: String, signData: String, path: String, xfp: String, address: String, origin: String, signType: Int): String
+    protected external fun parseETHSignature(cbor: String): String
+    protected external fun generateETHSignRequest(requestId: String, signData: String, signType: Int, chainId: Int, path: String, xfp: String, address: String, origin: String): String
 
     companion object {
         init {
