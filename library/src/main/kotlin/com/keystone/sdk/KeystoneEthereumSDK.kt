@@ -1,7 +1,7 @@
 package com.keystone.sdk
 
 import com.google.gson.Gson
-import com.keystone.module.SolanaSignature
+import com.keystone.module.Signature
 import com.keystone.module.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
@@ -13,9 +13,9 @@ class KeystoneEthereumSDK: KeystoneSDK() {
         TypedTransaction(4),
     }
 
-    public fun parseSignature(cborHex: String): SolanaSignature {
+    public fun parseSignature(cborHex: String): Signature {
         val jsonStr = super.parseETHSignature(cborHex)
-        val result = Gson().fromJson<SolanaSignature>(jsonStr, SolanaSignature::class.java)
+        val result = Gson().fromJson<Signature>(jsonStr, Signature::class.java)
         return super.handleError(jsonStr, result)
     }
 
