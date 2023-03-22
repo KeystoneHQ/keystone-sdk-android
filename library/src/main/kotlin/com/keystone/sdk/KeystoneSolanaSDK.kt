@@ -12,9 +12,9 @@ class KeystoneSolanaSDK : KeystoneSDK() {
     }
 
     public fun parseSignature(cborHex: String): Signature {
-        val jsonStr = super.parseSolSignature(cborHex)
+        val jsonStr = parseSolSignature(cborHex)
         val result = Gson().fromJson<Signature>(jsonStr, Signature::class.java)
-        return super.handleError(jsonStr, result)
+        return handleError(jsonStr, result)
     }
 
     public fun generateSignRequest(
@@ -26,8 +26,8 @@ class KeystoneSolanaSDK : KeystoneSDK() {
         origin: String = "",
         signType: SignType,
     ): UREncoder {
-        val jsonStr = super.generateSolSignRequest(requestId, signData, path, xfp, address, origin, signType.value)
-        val result = super.handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
-        return super.encodeQR(result.type, result.cbor)
+        val jsonStr = generateSolSignRequest(requestId, signData, path, xfp, address, origin, signType.value)
+        val result = handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
+        return encodeQR(result)
     }
 }

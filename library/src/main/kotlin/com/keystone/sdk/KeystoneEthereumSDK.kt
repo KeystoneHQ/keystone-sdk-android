@@ -14,9 +14,9 @@ class KeystoneEthereumSDK: KeystoneSDK() {
     }
 
     public fun parseSignature(cborHex: String): Signature {
-        val jsonStr = super.parseETHSignature(cborHex)
+        val jsonStr = parseETHSignature(cborHex)
         val result = Gson().fromJson<Signature>(jsonStr, Signature::class.java)
-        return super.handleError(jsonStr, result)
+        return handleError(jsonStr, result)
     }
 
     public fun generateSignRequest(
@@ -29,8 +29,8 @@ class KeystoneEthereumSDK: KeystoneSDK() {
         address: String = "",
         origin: String = "",
     ): UREncoder {
-        val jsonStr = super.generateETHSignRequest(requestId, signData, dataType.value, chainId, path, xfp, address, origin)
-        val result = super.handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
-        return super.encodeQR(result.type, result.cbor)
+        val jsonStr = generateETHSignRequest(requestId, signData, dataType.value, chainId, path, xfp, address, origin)
+        val result = handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
+        return encodeQR(result)
     }
 }
