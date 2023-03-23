@@ -13,13 +13,13 @@ class KeystoneEthereumSDK: KeystoneSDK() {
         TypedTransaction(4),
     }
 
-    public fun parseSignature(cborHex: String): Signature {
+    fun parseSignature(cborHex: String): Signature {
         val jsonStr = parseETHSignature(cborHex)
         val result = Gson().fromJson<Signature>(jsonStr, Signature::class.java)
         return handleError(jsonStr, result)
     }
 
-    public fun generateSignRequest(
+    fun generateSignRequest(
         requestId: String,
         signData: String,
         dataType: DataType,
