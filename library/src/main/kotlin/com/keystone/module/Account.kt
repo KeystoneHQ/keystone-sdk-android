@@ -1,14 +1,15 @@
 package com.keystone.module
 
-class Account(
+import com.google.gson.annotations.SerializedName
+
+data class Account(
     var chain: String,
     var path: String,
-    var publicKey: String,
+    @SerializedName("public_key") var publicKey: String,
     var name: String,
-    private var chainCode: String
+    @SerializedName("extended_public_key") private var extendedPublicKey: String,
 ) {
     fun getExtendedPublicKey(): String {
-        // TODO: implement
-        return publicKey + chainCode
+        return extendedPublicKey
     }
 }

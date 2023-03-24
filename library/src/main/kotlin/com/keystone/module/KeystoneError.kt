@@ -1,5 +1,5 @@
 package com.keystone.module
 
-data class KeystoneError (
+internal data class KeystoneError (
     val error: String?,
 )
