@@ -6,10 +6,11 @@ import com.keystone.module.MultiAccounts
 class KeystoneSDK(chains: Array<ChainType>? = ChainType.values()): KeystoneBaseSDK() {
     lateinit var eth: KeystoneEthereumSDK
     lateinit var sol: KeystoneSolanaSDK
+    lateinit var btc: KeystoneBitcoinSDK
     private var chains: Array<ChainType> = ChainType.values()
 
     enum class ChainType {
-        ETH, SOL
+        ETH, SOL, BTC
     }
 
     init {
@@ -23,6 +24,7 @@ class KeystoneSDK(chains: Array<ChainType>? = ChainType.values()): KeystoneBaseS
         when (chainType) {
             ChainType.ETH -> eth = KeystoneEthereumSDK()
             ChainType.SOL -> sol = KeystoneSolanaSDK()
+            ChainType.BTC -> btc = KeystoneBitcoinSDK()
         }
     }
 
@@ -30,6 +32,7 @@ class KeystoneSDK(chains: Array<ChainType>? = ChainType.values()): KeystoneBaseS
         when (chainType) {
             ChainType.ETH -> eth.maxFragmentLen = maxFragmentLen
             ChainType.SOL -> sol.maxFragmentLen = maxFragmentLen
+            ChainType.BTC -> btc.maxFragmentLen = maxFragmentLen
         }
     }
 

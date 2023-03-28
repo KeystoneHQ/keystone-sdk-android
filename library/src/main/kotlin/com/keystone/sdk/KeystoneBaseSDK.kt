@@ -11,14 +11,14 @@ open class KeystoneBaseSDK {
     private var urDecoder: URDecoder = URDecoder()
     open var maxFragmentLen: Int = 100
 
-    private fun String.decodeHex(): ByteArray {
+    protected fun String.decodeHex(): ByteArray {
         check(length % 2 == 0) { "HexString must have an even length" }
         return chunked(2)
             .map { it.toInt(16).toByte() }
             .toByteArray()
     }
 
-    private fun ByteArray.toHexString(): String {
+    protected fun ByteArray.toHexString(): String {
         return joinToString("") { "%02X".format(it) }
     }
 
