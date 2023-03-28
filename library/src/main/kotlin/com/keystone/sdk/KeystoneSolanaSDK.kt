@@ -5,19 +5,19 @@ import com.keystone.module.Signature
 import com.keystone.module.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
-class KeystoneSolanaSDK : KeystoneSDK() {
+class KeystoneSolanaSDK : KeystoneBaseSDK() {
     enum class SignType(val value: Int) {
         Transaction(1),
         Message(2),
     }
 
-    public fun parseSignature(cborHex: String): Signature {
-        val jsonStr = super.parseSolSignature(cborHex)
+    fun parseSignature(cborHex: String): Signature {
+        val jsonStr = native.parseSolSignature(cborHex)
         val result = Gson().fromJson<Signature>(jsonStr, Signature::class.java)
-        return super.handleError(jsonStr, result)
+        return handleError(jsonStr, result)
     }
 
-    public fun generateSignRequest(
+    fun generateSignRequest(
         requestId: String,
         signData: String,
         path: String,
@@ -26,8 +26,8 @@ class KeystoneSolanaSDK : KeystoneSDK() {
         origin: String = "",
         signType: SignType,
     ): UREncoder {
-        val jsonStr = super.generateSolSignRequest(requestId, signData, path, xfp, address, origin, signType.value)
-        val result = super.handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
-        return super.encodeQR(result.type, result.cbor)
+        val jsonStr = native.generateSolSignRequest(requestId, signData, path, xfp, address, origin, signType.value)
+        val result = handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
+        return encodeQR(result)
     }
 }

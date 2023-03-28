@@ -5,7 +5,7 @@ import com.keystone.module.Signature
 import com.keystone.module.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
-class KeystoneEthereumSDK: KeystoneSDK() {
+class KeystoneEthereumSDK: KeystoneBaseSDK() {
     enum class DataType(val value: Int) {
         Transaction(1),
         TypedData(2),
@@ -13,13 +13,13 @@ class KeystoneEthereumSDK: KeystoneSDK() {
         TypedTransaction(4),
     }
 
-    public fun parseSignature(cborHex: String): Signature {
-        val jsonStr = super.parseETHSignature(cborHex)
+    fun parseSignature(cborHex: String): Signature {
+        val jsonStr = native.parseETHSignature(cborHex)
         val result = Gson().fromJson<Signature>(jsonStr, Signature::class.java)
-        return super.handleError(jsonStr, result)
+        return handleError(jsonStr, result)
     }
 
-    public fun generateSignRequest(
+    fun generateSignRequest(
         requestId: String,
         signData: String,
         dataType: DataType,
@@ -29,8 +29,8 @@ class KeystoneEthereumSDK: KeystoneSDK() {
         address: String = "",
         origin: String = "",
     ): UREncoder {
-        val jsonStr = super.generateETHSignRequest(requestId, signData, dataType.value, chainId, path, xfp, address, origin)
-        val result = super.handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
-        return super.encodeQR(result.type, result.cbor)
+        val jsonStr = native.generateETHSignRequest(requestId, signData, dataType.value, chainId, path, xfp, address, origin)
+        val result = handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
+        return encodeQR(result)
     }
 }

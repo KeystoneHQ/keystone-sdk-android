@@ -1,47 +1,47 @@
 package com.keystone.sdk
 
 import com.google.gson.Gson
-import com.keystone.module.KeystoneError
-import com.sparrowwallet.hummingbird.UR
-import com.sparrowwallet.hummingbird.UREncoder
+import com.keystone.module.MultiAccounts
 
-open class KeystoneSDK {
-    private var maxFragmentLen: Int = 100
+class KeystoneSDK(chains: Array<ChainType>? = ChainType.values()): KeystoneBaseSDK() {
+    lateinit var eth: KeystoneEthereumSDK
+    lateinit var sol: KeystoneSolanaSDK
+    private var chains: Array<ChainType> = ChainType.values()
 
-    private fun String.decodeHex(): ByteArray {
-        check(length % 2 == 0) { "HexString must have an even length" }
-        return chunked(2)
-            .map { it.toInt(16).toByte() }
-            .toByteArray()
+    enum class ChainType {
+        ETH, SOL
     }
 
-    public fun setMaxFragmentLen(maxFragmentLen: Int) {
-        this.maxFragmentLen = maxFragmentLen
-    }
-
-    protected fun encodeQR(type: String, cbor: String): UREncoder {
-        val ur = UR(type, cbor.decodeHex())
-        return UREncoder(ur, this.maxFragmentLen, 10, 0)
-    }
-
-    protected fun <T>handleError(jsonStr: String, data: T): T{
-        val result = Gson().fromJson<KeystoneError>(jsonStr, KeystoneError::class.java)
-        if (result.error != null) {
-            throw Exception(result.error)
+    init {
+        if (chains != null) {
+            this.chains = chains
         }
-        return data
+        this.chains.forEach { initChain(it) }
     }
 
-    // Solana
-    protected external fun parseSolSignature(cbor: String): String
-    protected external fun generateSolSignRequest(requestId: String, signData: String, path: String, xfp: String, address: String, origin: String, signType: Int): String
-    // Ethereum
-    protected external fun parseETHSignature(cbor: String): String
-    protected external fun generateETHSignRequest(requestId: String, signData: String, signType: Int, chainId: Int, path: String, xfp: String, address: String, origin: String): String
-
-    companion object {
-        init {
-            System.loadLibrary("ur_registry_ffi")
+    private fun initChain(chainType: ChainType) {
+        when (chainType) {
+            ChainType.ETH -> eth = KeystoneEthereumSDK()
+            ChainType.SOL -> sol = KeystoneSolanaSDK()
         }
+    }
+
+    private fun setChainMaxFragmentLen(chainType: ChainType) {
+        when (chainType) {
+            ChainType.ETH -> eth.maxFragmentLen = maxFragmentLen
+            ChainType.SOL -> sol.maxFragmentLen = maxFragmentLen
+        }
+    }
+
+    override var maxFragmentLen: Int = 100
+    set(value) {
+        field = value
+        chains.forEach { setChainMaxFragmentLen(it) }
+    }
+
+    fun parseMultiAccounts(cborHex: String): MultiAccounts {
+        val jsonStr = native.parseCryptoMultiAccounts(cborHex)
+        val result = Gson().fromJson(jsonStr, MultiAccounts::class.java)
+        return handleError(jsonStr, result)
     }
 }
