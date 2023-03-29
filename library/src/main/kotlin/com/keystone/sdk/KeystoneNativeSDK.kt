@@ -9,6 +9,9 @@ internal class KeystoneNativeSDK {
     // Ethereum
     external fun parseETHSignature(cbor: String): String
     external fun generateETHSignRequest(requestId: String, signData: String, signType: Int, chainId: Int, path: String, xfp: String, address: String, origin: String): String
+    // Bitcoin
+    external fun parseCryptoPSBT(cbor: String): String
+    external fun generateCryptoPSBT(psbt: String): String
 
     companion object {
         init {
