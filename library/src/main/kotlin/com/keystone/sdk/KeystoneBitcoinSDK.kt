@@ -6,13 +6,13 @@ import com.keystone.module.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
 class KeystoneBitcoinSDK: KeystoneBaseSDK() {
-    fun parseCryptoPSBT(cborHex: String): ByteArray {
+    fun parsePSBT(cborHex: String): ByteArray {
         val jsonStr = native.parseCryptoPSBT(cborHex)
         val result = handleError(jsonStr, Gson().fromJson(jsonStr, PSBT::class.java))
         return result.psbt.decodeHex()
     }
 
-    fun generateCryptoPSBT(psbt: ByteArray): UREncoder {
+    fun generatePSBT(psbt: ByteArray): UREncoder {
         val jsonStr = native.generateCryptoPSBT(psbt.toHexString())
         val result = handleError(jsonStr, Gson().fromJson(jsonStr, UR::class.java))
         return encodeQR(result)
