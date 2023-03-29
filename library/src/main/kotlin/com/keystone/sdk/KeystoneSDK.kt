@@ -3,43 +3,19 @@ package com.keystone.sdk
 import com.google.gson.Gson
 import com.keystone.module.MultiAccounts
 
-class KeystoneSDK(chains: Array<ChainType>? = ChainType.values()): KeystoneBaseSDK() {
-    lateinit var eth: KeystoneEthereumSDK
-    lateinit var sol: KeystoneSolanaSDK
-    lateinit var btc: KeystoneBitcoinSDK
-    private var chains: Array<ChainType> = ChainType.values()
-
-    enum class ChainType {
-        ETH, SOL, BTC
+class KeystoneSDK(): KeystoneBaseSDK() {
+    companion object {
+        var maxFragmentLen: Int = 100
     }
 
-    init {
-        if (chains != null) {
-            this.chains = chains
-        }
-        this.chains.forEach { initChain(it) }
+    val eth: KeystoneEthereumSDK by lazy {
+        KeystoneEthereumSDK()
     }
-
-    private fun initChain(chainType: ChainType) {
-        when (chainType) {
-            ChainType.ETH -> eth = KeystoneEthereumSDK()
-            ChainType.SOL -> sol = KeystoneSolanaSDK()
-            ChainType.BTC -> btc = KeystoneBitcoinSDK()
-        }
+    val sol: KeystoneSolanaSDK by lazy {
+        KeystoneSolanaSDK()
     }
-
-    private fun setChainMaxFragmentLen(chainType: ChainType) {
-        when (chainType) {
-            ChainType.ETH -> eth.maxFragmentLen = maxFragmentLen
-            ChainType.SOL -> sol.maxFragmentLen = maxFragmentLen
-            ChainType.BTC -> btc.maxFragmentLen = maxFragmentLen
-        }
-    }
-
-    override var maxFragmentLen: Int = 100
-    set(value) {
-        field = value
-        chains.forEach { setChainMaxFragmentLen(it) }
+    val btc: KeystoneBitcoinSDK by lazy {
+        KeystoneBitcoinSDK()
     }
 
     fun parseMultiAccounts(cborHex: String): MultiAccounts {
