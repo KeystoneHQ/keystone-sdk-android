@@ -37,6 +37,7 @@ open class KeystoneBaseSDK {
     fun decodeQR(qr: String): UR? {
         if (urDecoder.receivePart(qr) && urDecoder.result != null) {
             val ur = urDecoder.result.ur
+            resetQRDecoder()
             return UR(ur.type, ur.cborBytes.toHexString())
         }
         return null
