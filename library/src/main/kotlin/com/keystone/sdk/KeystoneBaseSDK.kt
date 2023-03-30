@@ -3,6 +3,7 @@ package com.keystone.sdk
 import com.google.gson.Gson
 import com.keystone.module.KeystoneError
 import com.keystone.module.UR
+import com.sparrowwallet.hummingbird.ResultType
 import com.sparrowwallet.hummingbird.URDecoder
 import com.sparrowwallet.hummingbird.UREncoder
 
@@ -35,11 +36,25 @@ open class KeystoneBaseSDK {
     }
 
     fun decodeQR(qr: String): UR? {
-        if (urDecoder.receivePart(qr) && urDecoder.result != null) {
-            val ur = urDecoder.result.ur
-            return UR(ur.type, ur.cborBytes.toHexString())
+        val isReceived = urDecoder.receivePart(qr)
+        if (urDecoder.result == null) {
+            if (isReceived) {
+                return null
+            } else {
+                resetQRDecoder()
+                throw Exception("Unexpected QR code")
+            }
         }
-        return null
+        when (urDecoder.result.type) {
+            ResultType.SUCCESS -> {
+                val ur = urDecoder.result.ur
+                return UR(ur.type, ur.cborBytes.toHexString())
+            }
+            else -> {
+                resetQRDecoder()
+                throw Exception("Invalid QR code")
+            }
+        }
     }
 
     fun resetQRDecoder() {
