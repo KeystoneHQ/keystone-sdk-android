@@ -1,4 +1,4 @@
 [submodule "library/keystone-sdk-rust"]
 	path = library/keystone-sdk-rust
 	url = https://github.com/KeystoneHQ/keystone-sdk-rust.git
-	branch = master
+	branch = support-hdkey
