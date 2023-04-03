@@ -5,7 +5,7 @@ import com.keystone.module.MultiAccounts
 
 class KeystoneSDK(): KeystoneBaseSDK() {
     companion object {
-        var maxFragmentLen: Int = 100
+        var maxFragmentLen: Int = 400
     }
 
     val eth: KeystoneEthereumSDK by lazy {

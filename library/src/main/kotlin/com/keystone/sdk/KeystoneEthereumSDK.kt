@@ -15,7 +15,7 @@ class KeystoneEthereumSDK: KeystoneBaseSDK() {
 
     fun parseSignature(cborHex: String): Signature {
         val jsonStr = native.parseETHSignature(cborHex)
-        val result = Gson().fromJson<Signature>(jsonStr, Signature::class.java)
+        val result = Gson().fromJson(jsonStr, Signature::class.java)
         return handleError(jsonStr, result)
     }
 
@@ -30,7 +30,7 @@ class KeystoneEthereumSDK: KeystoneBaseSDK() {
         origin: String = "",
     ): UREncoder {
         val jsonStr = native.generateETHSignRequest(requestId, signData, dataType.value, chainId, path, xfp, address, origin)
-        val result = handleError(jsonStr, Gson().fromJson<UR>(jsonStr, UR::class.java))
+        val result = handleError(jsonStr, Gson().fromJson(jsonStr, UR::class.java))
         return encodeQR(result)
     }
 }
