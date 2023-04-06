@@ -26,14 +26,14 @@ class KeystoneSDK(): KeystoneBaseSDK() {
         return handleError(jsonStr, result)
     }
 
-    fun parseSourceHDKey(cborHex: String): HDKey {
-        val jsonStr = native.getSourceHDKey(cborHex)
+    fun parseExtendedPublicKey(cborHex: String): HDKey {
+        val jsonStr = native.parseExtendedPublicKey(cborHex)
         val result = Gson().fromJson(jsonStr, HDKey::class.java)
         return handleError(jsonStr, result)
     }
 
-    fun parseHDKeys(cborHex: String): MultiHDKeys {
-        val jsonStr = native.getHDKeys(cborHex)
+    fun parseMultiPublicKeys(cborHex: String): MultiHDKeys {
+        val jsonStr = native.parseMultiPublicKeys(cborHex)
         val result = Gson().fromJson(jsonStr, MultiHDKeys::class.java)
         return handleError(jsonStr, result)
     }
