@@ -6,6 +6,7 @@ internal class KeystoneNativeSDK {
     // HD Key
     external fun getSourceHDKey(cbor: String): String
     external fun getHDKeys(cbor: String): String
+    external fun getUncompressedKey(compressedKey: String): String
     // Solana
     external fun parseSolSignature(cbor: String): String
     external fun generateSolSignRequest(requestId: String, signData: String, path: String, xfp: String, address: String, origin: String, signType: Int): String

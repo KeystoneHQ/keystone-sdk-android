@@ -37,4 +37,8 @@ class KeystoneSDK(): KeystoneBaseSDK() {
         val result = Gson().fromJson(jsonStr, MultiHDKeys::class.java)
         return handleError(jsonStr, result)
     }
+
+    fun getUncompressedKey(compressedKey: String): String {
+        return native.getUncompressedKey(compressedKey)
+    }
 }
