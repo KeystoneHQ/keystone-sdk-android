@@ -39,6 +39,7 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     }
 
     fun getUncompressedKey(compressedKey: String): String {
-        return native.getUncompressedKey(compressedKey)
+        val jsonStr = native.getUncompressedKey(compressedKey)
+        return handleError(jsonStr, jsonStr)
     }
 }
