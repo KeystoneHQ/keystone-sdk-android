@@ -3,6 +3,10 @@ package com.keystone.sdk
 internal class KeystoneNativeSDK {
     // Multiple Accounts
     external fun parseCryptoMultiAccounts(cbor: String): String
+    // HD Key
+    external fun parseExtendedPublicKey(cbor: String): String
+    external fun parseMultiPublicKeys(cbor: String): String
+    external fun getUncompressedKey(compressedKey: String): String
     // Solana
     external fun parseSolSignature(cbor: String): String
     external fun generateSolSignRequest(requestId: String, signData: String, path: String, xfp: String, address: String, origin: String, signType: Int): String
