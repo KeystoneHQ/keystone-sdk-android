@@ -16,6 +16,9 @@ internal class KeystoneNativeSDK {
     // Bitcoin
     external fun parseCryptoPSBT(cbor: String): String
     external fun generateCryptoPSBT(psbt: String): String
+    // Cosmos
+    external fun parseCosmosSignature(cbor: String): String
+    external fun generateCosmosSignRequest(requestId: String, signData: String, dataType: Int, accounts: String, origin: String): String
 
     companion object {
         init {

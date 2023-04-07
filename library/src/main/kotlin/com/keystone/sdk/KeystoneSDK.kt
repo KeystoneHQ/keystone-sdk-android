@@ -19,6 +19,9 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     val btc: KeystoneBitcoinSDK by lazy {
         KeystoneBitcoinSDK()
     }
+    val cosmos: KeystoneCosmosSDK by lazy {
+        KeystoneCosmosSDK()
+    }
 
     fun parseMultiAccounts(cborHex: String): MultiAccounts {
         val jsonStr = native.parseCryptoMultiAccounts(cborHex)
