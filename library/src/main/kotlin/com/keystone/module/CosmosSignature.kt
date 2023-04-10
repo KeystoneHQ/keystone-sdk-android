@@ -1,7 +1,6 @@
 package com.keystone.module
 
 import com.google.gson.annotations.SerializedName
-import java.security.PublicKey
 
 data class CosmosSignature(
     @SerializedName("request_id") val requestId: String,
