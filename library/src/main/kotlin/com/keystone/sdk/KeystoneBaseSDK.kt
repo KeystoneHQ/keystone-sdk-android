@@ -1,6 +1,7 @@
 package com.keystone.sdk
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.keystone.module.KeystoneError
 import com.keystone.module.UR
 import com.sparrowwallet.hummingbird.ResultType
@@ -23,10 +24,12 @@ open class KeystoneBaseSDK {
     }
 
     protected fun <T>handleError(jsonStr: String, data: T): T{
-        val result = Gson().fromJson(jsonStr, KeystoneError::class.java)
-        if (result.error != null) {
-            throw Exception(result.error)
-        }
+        try {
+            val result = Gson().fromJson(jsonStr, KeystoneError::class.java)
+            if (result.error != null) {
+                throw Exception(result.error)
+            }
+        } catch (_: JsonSyntaxException) {}
         return data
     }
 
