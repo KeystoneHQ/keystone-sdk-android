@@ -3,7 +3,8 @@ package com.keystone.sdk
 import com.google.gson.Gson
 import com.keystone.module.CosmosSignRequest
 import com.keystone.module.CosmosSignature
-import com.keystone.module.UR
+import com.keystone.module.NativeUR
+import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
 class KeystoneCosmosSDK : KeystoneBaseSDK() {
@@ -14,8 +15,8 @@ class KeystoneCosmosSDK : KeystoneBaseSDK() {
         Message(4),
     }
 
-    fun parseSignature(cborHex: String): CosmosSignature {
-        val jsonStr = native.parseCosmosSignature(cborHex)
+    fun parseSignature(ur: UR): CosmosSignature {
+        val jsonStr = native.parseCosmosSignature(ur.type, ur.cborBytes.toHexString())
         val result = Gson().fromJson(jsonStr, CosmosSignature::class.java)
         return handleError(jsonStr, result)
     }
@@ -28,7 +29,7 @@ class KeystoneCosmosSDK : KeystoneBaseSDK() {
             Gson().toJson(cosmosSignRequest.accounts),
             cosmosSignRequest.origin
         )
-        val result = handleError(jsonStr, Gson().fromJson(jsonStr, UR::class.java))
+        val result = handleError(jsonStr, Gson().fromJson(jsonStr, NativeUR::class.java))
         return encodeQR(result)
     }
 }

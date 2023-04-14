@@ -3,8 +3,9 @@ package com.keystone.sdk
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.keystone.module.KeystoneError
-import com.keystone.module.UR
+import com.keystone.module.NativeUR
 import com.sparrowwallet.hummingbird.ResultType
+import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.URDecoder
 import com.sparrowwallet.hummingbird.UREncoder
 
@@ -33,8 +34,8 @@ open class KeystoneBaseSDK {
         return data
     }
 
-    fun encodeQR(ur: UR): UREncoder {
-        val encodeUR = com.sparrowwallet.hummingbird.UR(ur.type, ur.cbor.decodeHex())
+    fun encodeQR(ur: NativeUR): UREncoder {
+        val encodeUR = UR(ur.type, ur.cbor.decodeHex())
         return UREncoder(encodeUR, KeystoneSDK.maxFragmentLen, 10, 0)
     }
 
@@ -50,8 +51,7 @@ open class KeystoneBaseSDK {
         }
         when (urDecoder.result.type) {
             ResultType.SUCCESS -> {
-                val ur = urDecoder.result.ur
-                return UR(ur.type, ur.cborBytes.toHexString())
+                return urDecoder.result.ur
             }
             else -> {
                 resetQRDecoder()

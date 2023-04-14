@@ -1,8 +1,10 @@
 package com.keystone.sdk
 
 import com.google.gson.Gson
+import com.keystone.module.NativeUR
 import com.keystone.module.Signature
-import com.keystone.module.UR
+import com.keystone.module.SolSignRequest
+import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
 class KeystoneSolanaSDK : KeystoneBaseSDK() {
@@ -11,23 +13,23 @@ class KeystoneSolanaSDK : KeystoneBaseSDK() {
         Message(2),
     }
 
-    fun parseSignature(cborHex: String): Signature {
-        val jsonStr = native.parseSolSignature(cborHex)
+    fun parseSignature(ur: UR): Signature {
+        val jsonStr = native.parseSolSignature(ur.type, ur.cborBytes.toHexString())
         val result = Gson().fromJson(jsonStr, Signature::class.java)
         return handleError(jsonStr, result)
     }
 
-    fun generateSignRequest(
-        requestId: String,
-        signData: String,
-        path: String,
-        xfp: String,
-        address: String = "",
-        origin: String = "",
-        signType: SignType,
-    ): UREncoder {
-        val jsonStr = native.generateSolSignRequest(requestId, signData, path, xfp, address, origin, signType.value)
-        val result = handleError(jsonStr, Gson().fromJson(jsonStr, UR::class.java))
+    fun generateSignRequest(solSignRequest: SolSignRequest): UREncoder {
+        val jsonStr = native.generateSolSignRequest(
+            solSignRequest.requestId,
+            solSignRequest.signData,
+            solSignRequest.path,
+            solSignRequest.xfp,
+            solSignRequest.address,
+            solSignRequest.origin,
+            solSignRequest.signType.value,
+        )
+        val result = handleError(jsonStr, Gson().fromJson(jsonStr, NativeUR::class.java))
         return encodeQR(result)
     }
 }

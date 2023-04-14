@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.keystone.module.MultiAccounts
 import com.keystone.module.HDKey
 import com.keystone.module.MultiHDKeys
+import com.sparrowwallet.hummingbird.UR
 
 class KeystoneSDK(): KeystoneBaseSDK() {
     companion object {
@@ -26,20 +27,20 @@ class KeystoneSDK(): KeystoneBaseSDK() {
         KeystoneTronSDK()
     }
 
-    fun parseMultiAccounts(cborHex: String): MultiAccounts {
-        val jsonStr = native.parseCryptoMultiAccounts(cborHex)
+    fun parseMultiAccounts(ur: UR): MultiAccounts {
+        val jsonStr = native.parseCryptoMultiAccounts(ur.type, ur.cborBytes.toHexString())
         val result = Gson().fromJson(jsonStr, MultiAccounts::class.java)
         return handleError(jsonStr, result)
     }
 
-    fun parseExtendedPublicKey(cborHex: String): HDKey {
-        val jsonStr = native.parseExtendedPublicKey(cborHex)
+    fun parseExtendedPublicKey(ur: UR): HDKey {
+        val jsonStr = native.parseExtendedPublicKey(ur.type, ur.cborBytes.toHexString())
         val result = Gson().fromJson(jsonStr, HDKey::class.java)
         return handleError(jsonStr, result)
     }
 
-    fun parseMultiPublicKeys(cborHex: String): MultiHDKeys {
-        val jsonStr = native.parseMultiPublicKeys(cborHex)
+    fun parseMultiPublicKeys(ur: UR): MultiHDKeys {
+        val jsonStr = native.parseMultiPublicKeys(ur.type, ur.cborBytes.toHexString())
         val result = Gson().fromJson(jsonStr, MultiHDKeys::class.java)
         return handleError(jsonStr, result)
     }
