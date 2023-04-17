@@ -22,6 +22,9 @@ internal class KeystoneNativeSDK {
     // Tron
     external fun parseTronSignature(type: String, cbor: String): String
     external fun generateTronSignRequest(requestId: String, signData: String, path: String, xfp: String, tokenInfo: String, address: String, origin: String): String
+    // Aptos
+    external fun parseAptosSignature(type: String, cbor: String): String
+    external fun generateAptosSignRequest(requestId: String, signData: String, accounts: String, origin: String, dataType: Int): String
 
     companion object {
         init {

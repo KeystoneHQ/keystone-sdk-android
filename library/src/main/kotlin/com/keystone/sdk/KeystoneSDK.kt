@@ -26,6 +26,9 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     val tron: KeystoneTronSDK by lazy {
         KeystoneTronSDK()
     }
+    val aptos: KeystoneAptosSDK by lazy {
+        KeystoneAptosSDK()
+    }
 
     fun parseMultiAccounts(ur: UR): MultiAccounts {
         val jsonStr = native.parseCryptoMultiAccounts(ur.type, ur.cborBytes.toHexString())
