@@ -3,7 +3,6 @@ package com.keystone.sdk
 import com.google.gson.Gson
 import com.keystone.module.NativeUR
 import com.keystone.module.Signature
-import com.keystone.module.TokenInfo
 import com.keystone.module.TronSignRequest
 import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
