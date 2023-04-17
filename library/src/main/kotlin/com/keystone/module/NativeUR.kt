@@ -1,6 +1,6 @@
 package com.keystone.module
 
-data class UR(
+data class NativeUR(
     val type: String,
     val cbor: String,
 )
