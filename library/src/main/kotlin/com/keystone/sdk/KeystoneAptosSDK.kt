@@ -8,7 +8,7 @@ import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
 class KeystoneAptosSDK: KeystoneBaseSDK() {
-    enum class DataType(val value: Int) {
+    enum class SignType(val value: Int) {
         Single(1),
         Multi(2),
         Message(3),

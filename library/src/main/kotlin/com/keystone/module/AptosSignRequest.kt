@@ -11,7 +11,7 @@ data class AptosAccount(
 data class AptosSignRequest(
     val requestId: String,
     val signData: String,
-    val dataType: KeystoneAptosSDK.DataType,
+    val signType: KeystoneAptosSDK.SignType,
     val accounts: List<AptosAccount>,
     val origin: String = "",
 )
