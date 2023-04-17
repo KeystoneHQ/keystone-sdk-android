@@ -26,7 +26,7 @@ class KeystoneAptosSDK: KeystoneBaseSDK() {
             aptosSignRequest.signData,
             Gson().toJson(aptosSignRequest.accounts),
             aptosSignRequest.origin,
-            aptosSignRequest.dataType.value,
+            aptosSignRequest.signType.value,
         )
         val result = handleError(jsonStr, Gson().fromJson(jsonStr, NativeUR::class.java))
         return encodeQR(result)
