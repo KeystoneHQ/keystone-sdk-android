@@ -1,6 +1,8 @@
 package com.keystone.sdk
 
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import com.keystone.module.KeystoneError
 import com.keystone.module.NativeUR
@@ -62,5 +64,21 @@ open class KeystoneBaseSDK {
 
     fun resetQRDecoder() {
         urDecoder = URDecoder()
+    }
+
+    fun toJson(any: Any, fieldNamingPolicy: FieldNamingPolicy = FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES): String {
+        val gsonBuilder = GsonBuilder()
+        gsonBuilder.setFieldNamingPolicy(fieldNamingPolicy)
+        return gsonBuilder.create().toJson(any)
+    }
+
+    fun <T> fromJson(jsonStr: String, classOfT: Class<T>, fieldNamingPolicy: FieldNamingPolicy = FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES): T {
+        val gsonBuilder = GsonBuilder()
+        gsonBuilder.setFieldNamingPolicy(fieldNamingPolicy)
+        return gsonBuilder.create().fromJson(jsonStr, classOfT)
+    }
+
+    fun getTimestamp(): Long {
+        return System.currentTimeMillis()
     }
 }

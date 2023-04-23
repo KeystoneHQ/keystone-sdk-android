@@ -29,22 +29,31 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     val aptos: KeystoneAptosSDK by lazy {
         KeystoneAptosSDK()
     }
+    val ltc: KeystoneLtcSDK by lazy {
+        KeystoneLtcSDK()
+    }
+    val bch: KeystoneBchSDK by lazy {
+        KeystoneBchSDK()
+    }
+    val dash: KeystoneDashSDK by lazy {
+        KeystoneDashSDK()
+    }
 
     fun parseMultiAccounts(ur: UR): MultiAccounts {
         val jsonStr = native.parseCryptoMultiAccounts(ur.type, ur.cborBytes.toHexString())
-        val result = Gson().fromJson(jsonStr, MultiAccounts::class.java)
+        val result = fromJson(jsonStr, MultiAccounts::class.java)
         return handleError(jsonStr, result)
     }
 
     fun parseExtendedPublicKey(ur: UR): HDKey {
         val jsonStr = native.parseExtendedPublicKey(ur.type, ur.cborBytes.toHexString())
-        val result = Gson().fromJson(jsonStr, HDKey::class.java)
+        val result = fromJson(jsonStr, HDKey::class.java)
         return handleError(jsonStr, result)
     }
 
     fun parseMultiPublicKeys(ur: UR): MultiHDKeys {
         val jsonStr = native.parseMultiPublicKeys(ur.type, ur.cborBytes.toHexString())
-        val result = Gson().fromJson(jsonStr, MultiHDKeys::class.java)
+        val result = fromJson(jsonStr, MultiHDKeys::class.java)
         return handleError(jsonStr, result)
     }
 

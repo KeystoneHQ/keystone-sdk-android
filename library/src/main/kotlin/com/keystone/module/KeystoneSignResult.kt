@@ -1,6 +1,6 @@
 package com.keystone.module
 
-data class Signature(
+data class KeystoneSignResult(
     val requestId: String,
-    val signature: String,
+    val rawData: String,
 )

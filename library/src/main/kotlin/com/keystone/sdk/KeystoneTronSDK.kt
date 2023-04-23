@@ -10,7 +10,7 @@ import com.sparrowwallet.hummingbird.UREncoder
 class KeystoneTronSDK: KeystoneBaseSDK() {
     fun parseSignature(ur: UR): Signature {
         val jsonStr = native.parseTronSignature(ur.type, ur.cborBytes.toHexString())
-        val result = Gson().fromJson(jsonStr, Signature::class.java)
+        val result = fromJson(jsonStr, Signature::class.java)
         return handleError(jsonStr, result)
     }
 

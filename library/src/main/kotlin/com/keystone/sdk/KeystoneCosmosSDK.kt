@@ -17,7 +17,7 @@ class KeystoneCosmosSDK : KeystoneBaseSDK() {
 
     fun parseSignature(ur: UR): CosmosSignature {
         val jsonStr = native.parseCosmosSignature(ur.type, ur.cborBytes.toHexString())
-        val result = Gson().fromJson(jsonStr, CosmosSignature::class.java)
+        val result = fromJson(jsonStr, CosmosSignature::class.java)
         return handleError(jsonStr, result)
     }
 
@@ -26,7 +26,7 @@ class KeystoneCosmosSDK : KeystoneBaseSDK() {
             cosmosSignRequest.requestId,
             cosmosSignRequest.signData,
             cosmosSignRequest.dataType.value,
-            Gson().toJson(cosmosSignRequest.accounts),
+            toJson(cosmosSignRequest.accounts),
             cosmosSignRequest.origin
         )
         val result = handleError(jsonStr, Gson().fromJson(jsonStr, NativeUR::class.java))
