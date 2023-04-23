@@ -25,6 +25,9 @@ internal class KeystoneNativeSDK {
     // Aptos
     external fun parseAptosSignature(type: String, cbor: String): String
     external fun generateAptosSignRequest(requestId: String, signData: String, accounts: String, origin: String, signType: Int): String
+    // Keystone
+    external fun parseKeystoneSignResult(type: String, cbor: String): String
+    external fun generateKeystoneSignRequest(requestId: String, coinType: Int, signData: String, xfp: String, origin: String, timestamp: Long): String
 
     companion object {
         init {

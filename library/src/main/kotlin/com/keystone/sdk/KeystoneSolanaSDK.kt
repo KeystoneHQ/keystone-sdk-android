@@ -15,7 +15,7 @@ class KeystoneSolanaSDK : KeystoneBaseSDK() {
 
     fun parseSignature(ur: UR): Signature {
         val jsonStr = native.parseSolSignature(ur.type, ur.cborBytes.toHexString())
-        val result = Gson().fromJson(jsonStr, Signature::class.java)
+        val result = fromJson(jsonStr, Signature::class.java)
         return handleError(jsonStr, result)
     }
 

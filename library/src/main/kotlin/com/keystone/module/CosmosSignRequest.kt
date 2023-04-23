@@ -14,5 +14,4 @@ data class CosmosSignRequest(
     val dataType: KeystoneCosmosSDK.DataType,
     val accounts: List<CosmosAccount>,
     val origin: String = "",
-    val address: String = "",
 )

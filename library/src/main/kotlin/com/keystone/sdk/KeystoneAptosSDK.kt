@@ -16,7 +16,7 @@ class KeystoneAptosSDK: KeystoneBaseSDK() {
 
     fun parseSignature(ur: UR): AptosSignature {
         val jsonStr = native.parseAptosSignature(ur.type, ur.cborBytes.toHexString())
-        val result = Gson().fromJson(jsonStr, AptosSignature::class.java)
+        val result = fromJson(jsonStr, AptosSignature::class.java)
         return handleError(jsonStr, result)
     }
 
