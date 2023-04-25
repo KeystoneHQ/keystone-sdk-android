@@ -61,4 +61,9 @@ class KeystoneSDK(): KeystoneBaseSDK() {
         val jsonStr = native.getUncompressedKey(compressedKey)
         return handleError(jsonStr, jsonStr)
     }
+
+    fun derivePublicKey(xpub: String, path: String): String {
+        val jsonStr = native.derivePublicKey(xpub, path)
+        return handleError(jsonStr, jsonStr)
+    }
 }

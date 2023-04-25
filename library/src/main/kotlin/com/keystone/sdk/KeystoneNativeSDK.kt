@@ -7,6 +7,7 @@ internal class KeystoneNativeSDK {
     external fun parseExtendedPublicKey(type: String, cbor: String): String
     external fun parseMultiPublicKeys(type: String, cbor: String): String
     external fun getUncompressedKey(compressedKey: String): String
+    external fun derivePublicKey(xpub: String, path: String): String
     // Solana
     external fun parseSolSignature(type: String, cbor: String): String
     external fun generateSolSignRequest(requestId: String, signData: String, path: String, xfp: String, address: String, origin: String, signType: Int): String
