@@ -29,6 +29,9 @@ internal class KeystoneNativeSDK {
     // Keystone
     external fun parseKeystoneSignResult(type: String, cbor: String): String
     external fun generateKeystoneSignRequest(requestId: String, coinType: Int, signData: String, xfp: String, origin: String, timestamp: Long): String
+    // Near
+    external fun parseNearSignature(type: String, cbor: String): String
+    external fun generateNearSignRequest(requestId: String, signData: String, path: String, xfp: String, account: String, origin: String): String
 
     companion object {
         init {

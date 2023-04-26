@@ -1,6 +1,5 @@
 package com.keystone.sdk
 
-import com.google.gson.Gson
 import com.keystone.module.MultiAccounts
 import com.keystone.module.HDKey
 import com.keystone.module.MultiHDKeys
@@ -37,6 +36,9 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     }
     val dash: KeystoneDashSDK by lazy {
         KeystoneDashSDK()
+    }
+    val near: KeystoneNearSDK by lazy {
+        KeystoneNearSDK()
     }
 
     fun parseMultiAccounts(ur: UR): MultiAccounts {
