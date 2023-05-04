@@ -32,6 +32,10 @@ internal class KeystoneNativeSDK {
     // Near
     external fun parseNearSignature(type: String, cbor: String): String
     external fun generateNearSignRequest(requestId: String, signData: String, path: String, xfp: String, account: String, origin: String): String
+    // Arweave
+    external fun parseArweaveAccount(type: String, cbor: String): String
+    external fun parseArweaveSignature(type: String, cbor: String): String
+    external fun generateArweaveSignRequest(requestId: String, signData: String, signType: Int, saltLen: Int, masterFingerprint: String, account: String, origin: String): String
 
     companion object {
         init {
