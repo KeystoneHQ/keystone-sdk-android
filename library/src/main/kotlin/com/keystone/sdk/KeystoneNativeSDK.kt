@@ -22,7 +22,7 @@ internal class KeystoneNativeSDK {
     external fun generateCosmosSignRequest(requestId: String, signData: String, dataType: Int, accounts: String, origin: String): String
     // Tron
     external fun parseTronSignature(type: String, cbor: String): String
-    external fun generateTronSignRequest(requestId: String, signData: String, path: String, xfp: String, tokenInfo: String, address: String, origin: String): String
+    external fun generateTronSignRequest(requestId: String, signData: String, path: String, xfp: String, tokenInfo: String, origin: String, timestamp: Long): String
     // Aptos
     external fun parseAptosSignature(type: String, cbor: String): String
     external fun generateAptosSignRequest(requestId: String, signData: String, accounts: String, origin: String, signType: Int): String

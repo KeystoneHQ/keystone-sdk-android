@@ -6,6 +6,5 @@ data class TronSignRequest(
     val path: String,
     val xfp: String,
     val tokenInfo: TokenInfo? = null,
-    val address: String = "",
     val origin: String = "",
 )
