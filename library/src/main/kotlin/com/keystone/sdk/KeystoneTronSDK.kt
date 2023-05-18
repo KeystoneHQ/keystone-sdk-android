@@ -21,8 +21,8 @@ class KeystoneTronSDK: KeystoneBaseSDK() {
             tronSignRequest.path,
             tronSignRequest.xfp,
             if (tronSignRequest.tokenInfo == null) "" else Gson().toJson(tronSignRequest.tokenInfo),
-            tronSignRequest.address,
             tronSignRequest.origin,
+            getTimestamp(),
         )
         val result = handleError(jsonStr, Gson().fromJson(jsonStr, NativeUR::class.java))
         return encodeQR(result)
