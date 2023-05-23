@@ -39,6 +39,10 @@ internal class KeystoneNativeSDK {
     external fun parseArweaveAccount(type: String, cbor: String): String
     external fun parseArweaveSignature(type: String, cbor: String): String
     external fun generateArweaveSignRequest(requestId: String, signData: String, signType: Int, saltLen: Int, masterFingerprint: String, account: String, origin: String): String
+    // Cardano
+    external fun parseCardanoSignature(type: String, cbor: String): String
+    external fun generateCardanoSignRequest(requestId: String, signData: String, utxos: String, certKeys: String, origin: String): String
+
 
     companion object {
         init {
