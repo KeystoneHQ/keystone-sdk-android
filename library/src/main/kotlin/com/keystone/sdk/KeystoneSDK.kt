@@ -46,6 +46,9 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     val sui: KeystoneSuiSDK by lazy {
         KeystoneSuiSDK()
     }
+    val cardano: KeystoneCardanoSDK by lazy {
+        KeystoneCardanoSDK()
+    }
 
     fun parseMultiAccounts(ur: UR): MultiAccounts {
         val jsonStr = native.parseCryptoMultiAccounts(ur.type, ur.cborBytes.toHexString())
