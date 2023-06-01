@@ -4,6 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
+import com.keystone.module.DecodeResult
 import com.keystone.module.KeystoneError
 import com.keystone.module.NativeUR
 import com.sparrowwallet.hummingbird.ResultType
@@ -41,11 +42,12 @@ open class KeystoneBaseSDK {
         return UREncoder(encodeUR, KeystoneSDK.maxFragmentLen, 10, 0)
     }
 
-    fun decodeQR(qr: String): UR? {
+    fun decodeQR(qr: String): DecodeResult {
         val isReceived = urDecoder.receivePart(qr)
         if (urDecoder.result == null) {
             if (isReceived) {
-                return null
+                val progress = (urDecoder.estimatedPercentComplete * 100).toInt()
+                return DecodeResult(progress)
             } else {
                 resetQRDecoder()
                 throw Exception("Unexpected QR code")
@@ -53,7 +55,7 @@ open class KeystoneBaseSDK {
         }
         when (urDecoder.result.type) {
             ResultType.SUCCESS -> {
-                return urDecoder.result.ur
+                return DecodeResult(100, urDecoder.result.ur)
             }
             else -> {
                 resetQRDecoder()
