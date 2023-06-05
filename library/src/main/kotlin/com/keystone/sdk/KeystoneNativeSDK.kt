@@ -4,8 +4,8 @@ internal class KeystoneNativeSDK {
     // Multiple Accounts
     external fun parseCryptoMultiAccounts(type: String, cbor: String): String
     // HD Key
-    external fun parseExtendedPublicKey(type: String, cbor: String): String
-    external fun parseMultiPublicKeys(type: String, cbor: String): String
+    external fun parseCryptoHDKey(type: String, cbor: String): String
+    external fun parseCryptoAccount(type: String, cbor: String): String
     external fun getUncompressedKey(compressedKey: String): String
     external fun derivePublicKey(xpub: String, path: String): String
     // Solana
