@@ -20,7 +20,7 @@ data class Account(
     var publicKey: String,
     var name: String,
     var xfp: String,
-    val note: String,
+    val note: String?,
     var extra: Extra,
     private var chainCode: String,
     private var extendedPublicKey: String,
