@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.keystone'
-version = '0.0.1'
+version = '0.5.0'
 
 android {
     compileSdkVersion 31
