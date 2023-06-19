@@ -1,7 +1,5 @@
 package com.keystone.module
 
-import com.keystone.sdk.KeystoneSuiSDK
-
 data class SuiAccount(
     val path: String,
     val xfp: String,
@@ -10,8 +8,7 @@ data class SuiAccount(
 
 data class SuiSignRequest(
     val requestId: String,
-    val signData: String,
-    val signType: KeystoneSuiSDK.SignType,
+    val intentMessage: String,
     val accounts: List<SuiAccount>,
     val origin: String = "",
 )

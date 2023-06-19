@@ -28,7 +28,7 @@ internal class KeystoneNativeSDK {
     external fun generateAptosSignRequest(requestId: String, signData: String, accounts: String, origin: String, signType: Int): String
     // Sui
     external fun parseSuiSignature(type: String, cbor: String): String
-    external fun generateSuiSignRequest(requestId: String, signData: String, signType: Int, accounts: String, origin: String): String
+    external fun generateSuiSignRequest(requestId: String, intentMessage: String, accounts: String, origin: String): String
     // Keystone
     external fun parseKeystoneSignResult(type: String, cbor: String): String
     external fun generateKeystoneSignRequest(requestId: String, coinType: Int, signData: String, xfp: String, origin: String, timestamp: Long): String

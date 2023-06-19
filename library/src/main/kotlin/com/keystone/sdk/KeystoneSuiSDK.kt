@@ -8,12 +8,6 @@ import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
 class KeystoneSuiSDK: KeystoneBaseSDK() {
-    enum class SignType(val value: Int) {
-        Single(1),
-        Multi(2),
-        Message(3),
-    }
-
     fun parseSignature(ur: UR): SuiSignature {
         val jsonStr = native.parseSuiSignature(ur.type, ur.cborBytes.toHexString())
         val result = fromJson(jsonStr, SuiSignature::class.java)
@@ -23,8 +17,7 @@ class KeystoneSuiSDK: KeystoneBaseSDK() {
     fun generateSignRequest(suiSignRequest: SuiSignRequest): UREncoder {
         val jsonStr = native.generateSuiSignRequest(
             suiSignRequest.requestId,
-            suiSignRequest.signData,
-            suiSignRequest.signType.value,
+            suiSignRequest.intentMessage,
             Gson().toJson(suiSignRequest.accounts),
             suiSignRequest.origin,
         )
