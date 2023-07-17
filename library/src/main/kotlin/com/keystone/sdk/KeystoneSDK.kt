@@ -22,6 +22,9 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     val cosmos: KeystoneCosmosSDK by lazy {
         KeystoneCosmosSDK()
     }
+    val evm: KeystoneEvmSDK by lazy {
+        KeystoneEvmSDK()
+    }
     val tron: KeystoneTronSDK by lazy {
         KeystoneTronSDK()
     }
