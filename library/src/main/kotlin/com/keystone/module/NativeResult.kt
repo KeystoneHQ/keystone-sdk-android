@@ -1,5 +1,5 @@
 package com.keystone.module
 
-data class NativeResult(
-    val result: String
+data class NativeResult<T>(
+    val result: T
 )
