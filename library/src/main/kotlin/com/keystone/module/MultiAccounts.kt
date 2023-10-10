@@ -5,4 +5,5 @@ data class MultiAccounts (
     val keys: List<Account>,
     val device: String?,
     val deviceId: String?,
+    val deviceVersion: String?,
 )
