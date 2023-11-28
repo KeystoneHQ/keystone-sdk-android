@@ -2,15 +2,15 @@ package com.keystone.sdk
 
 import com.google.gson.Gson
 import com.keystone.module.NativeUR
-import com.keystone.module.Signature
 import com.keystone.module.TronSignRequest
+import com.keystone.module.TronSignature
 import com.sparrowwallet.hummingbird.UR
 import com.sparrowwallet.hummingbird.UREncoder
 
 class KeystoneTronSDK: KeystoneBaseSDK() {
-    fun parseSignature(ur: UR): Signature {
+    fun parseSignature(ur: UR): TronSignature {
         val jsonStr = native.parseTronSignature(ur.type, ur.cborBytes.toHexString())
-        val result = fromJson(jsonStr, Signature::class.java)
+        val result = fromJson(jsonStr, TronSignature::class.java)
         return handleError(jsonStr, result)
     }
 
