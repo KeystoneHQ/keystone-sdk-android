@@ -10,7 +10,7 @@ else
   wget -q https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
   unzip -q android-ndk-r25c-linux.zip
   export ANDROID_NDK_HOME=$current_dir/android-ndk-r25c
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain=nightly-2023-06-26
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain=nightly-2023-12-01
   source "$HOME/.cargo/env"
   cargo install cargo-ndk
   rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android
