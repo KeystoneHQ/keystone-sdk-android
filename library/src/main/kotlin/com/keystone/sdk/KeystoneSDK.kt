@@ -3,6 +3,7 @@ package com.keystone.sdk
 import com.keystone.module.Account
 import com.keystone.module.MultiAccounts
 import com.keystone.module.NativeResult
+import com.keystone.module.ZcashAccounts
 import com.sparrowwallet.hummingbird.UR
 
 class KeystoneSDK(): KeystoneBaseSDK() {
@@ -68,6 +69,12 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     fun parseCryptoAccount(ur: UR): MultiAccounts {
         val jsonStr = native.parseCryptoAccount(ur.type, ur.cborBytes.toHexString())
         val result = fromJson(jsonStr, MultiAccounts::class.java)
+        return handleError(jsonStr, result)
+    }
+
+    fun parseZcashAccounts(ur: UR): ZcashAccounts {
+        val jsonStr = native.parseZcashAccounts(ur.type, ur.cborBytes.toHexString())
+        val result = fromJson(jsonStr, ZcashAccounts::class.java)
         return handleError(jsonStr, result)
     }
 

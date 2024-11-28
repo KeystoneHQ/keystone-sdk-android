@@ -6,6 +6,7 @@ internal class KeystoneNativeSDK {
     // HD Key
     external fun parseCryptoHDKey(type: String, cbor: String): String
     external fun parseCryptoAccount(type: String, cbor: String): String
+    external fun parseZcashAccounts(type: String, cbor: String): String
     external fun getUncompressedKey(compressedKey: String): String
     external fun derivePublicKey(xpub: String, path: String): String
     external fun parseHDPath(hdPath: String): String
@@ -46,7 +47,9 @@ internal class KeystoneNativeSDK {
     // Cardano
     external fun parseCardanoSignature(type: String, cbor: String): String
     external fun generateCardanoSignRequest(requestId: String, signData: String, utxos: String, certKeys: String, origin: String): String
-
+    // Zcash
+    external fun parseZcashPczt(type: String, cbor: String): String
+    external fun generateZcashPczt(pczt: String): String
 
     companion object {
         init {
