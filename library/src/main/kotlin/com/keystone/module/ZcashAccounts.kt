@@ -2,7 +2,7 @@ package com.keystone.module
 
 data class ZcashAccounts (
     val seedFingerprint: String,
-    val accounts: List<Account>,
+    val accounts: List<ZcashAccount>,
 )
 
 data class ZcashAccount(
