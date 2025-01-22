@@ -8,7 +8,7 @@ import com.sparrowwallet.hummingbird.UR
 
 class KeystoneSDK(): KeystoneBaseSDK() {
     companion object {
-        var maxFragmentLen: Int = 400
+        var maxFragmentLen: Int = 200
     }
 
     val eth: KeystoneEthereumSDK by lazy {
