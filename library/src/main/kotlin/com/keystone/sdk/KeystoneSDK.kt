@@ -8,7 +8,7 @@ import com.sparrowwallet.hummingbird.UR
 
 class KeystoneSDK(): KeystoneBaseSDK() {
     companion object {
-        var maxFragmentLen: Int = 400
+        var maxFragmentLen: Int = 200
     }
 
     val eth: KeystoneEthereumSDK by lazy {
@@ -52,6 +52,10 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     }
     val cardano: KeystoneCardanoSDK by lazy {
         KeystoneCardanoSDK()
+    }
+
+    val zcash: KeystoneZcashSDK by lazy {
+        KeystoneZcashSDK()
     }
 
     fun parseMultiAccounts(ur: UR): MultiAccounts {
