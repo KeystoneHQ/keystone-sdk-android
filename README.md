@@ -34,3 +34,25 @@ dependencies {
     compile 'com.github.KeystoneHQ/keystone-sdk-android:{latest version}'
 }
 ```
+
+## PSBT Extend
+
+```kotlin
+val sdk = KeystoneSDK()
+val encoder = sdk.btc.generatePSBTExtend(psbtBytes, coinId = 2)
+val result = sdk.btc.parsePSBTExtend(ur)
+// result.psbt: ByteArray; result.coinId: Int? (null for an omitted Bitcoin coin field)
+```
+
+Supported coin IDs: `0` Bitcoin (omitted in CBOR), `2` Litecoin,
+`3` Dogecoin, `4` Dash, `145` Bitcoin Cash.
+
+Build with an installed Android NDK and JDK compatible with Gradle 7.6.1:
+
+```bash
+export ANDROID_NDK_HOME="/path/to/android/ndk"
+./gradlew :library:assembleRelease
+```
+
+The preBuild task builds the Rust submodule and copies all four ABI libraries.
+The AAR is generated in `library/build/outputs/aar/`.
