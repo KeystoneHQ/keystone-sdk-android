@@ -21,7 +21,7 @@ class KeystoneBitcoinSDK: KeystoneBaseSDK() {
         return encodeQR(result)
     }
 
-    /** coinId: 0 Bitcoin, 2 Litecoin, 3 Dogecoin, 4 Dash, 145 Bitcoin Cash. */
+    /** coinId: 0 Bitcoin, 2 Litecoin, 3 Dogecoin, 5 Dash, 145 Bitcoin Cash. */
     @JvmOverloads
     fun generatePSBTExtend(psbt: ByteArray, coinId: Int = 0): UREncoder {
         val jsonStr = native.generateCryptoPSBTExtend(psbt.toHexString(), coinId)

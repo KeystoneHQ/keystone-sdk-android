@@ -45,9 +45,9 @@ val result = sdk.btc.parsePSBTExtend(ur)
 ```
 
 Supported coin IDs: `0` Bitcoin (omitted in CBOR), `2` Litecoin,
-`3` Dogecoin, `4` Dash, `145` Bitcoin Cash.
+`3` Dogecoin, `5` Dash, `145` Bitcoin Cash.
 
-Build with an installed Android NDK and JDK compatible with Gradle 7.6.1:
+Build with an installed Android NDK and JDK 17 (the Gradle 7.6.1 wrapper does not support JDK 21):
 
 ```bash
 export ANDROID_NDK_HOME="/path/to/android/ndk"
