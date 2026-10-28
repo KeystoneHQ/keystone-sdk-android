@@ -28,17 +28,14 @@ internal class KeystoneNativeSDK {
     external fun parseEvmSignature(type: String, cbor: String): String
     external fun generateEvmSignRequest(requestId: String, signData: String, dataType: Int, customChainIdentifier: Int, account: String, origin: String): String
     // Tron
-    external fun parseTronSignature(type: String, cbor: String): String
-    external fun generateTronSignRequest(requestId: String, signData: String, path: String, xfp: String, tokenInfo: String, origin: String, timestamp: Long): String
+    external fun parseTronNativeSignature(type: String, cbor: String): String
+    external fun generateTronNativeSignRequest(requestId: String, signData: String, path: String, xfp: String, dataType: Int, address: String, origin: String): String
     // Aptos
     external fun parseAptosSignature(type: String, cbor: String): String
     external fun generateAptosSignRequest(requestId: String, signData: String, accounts: String, origin: String, signType: Int): String
     // Sui
     external fun parseSuiSignature(type: String, cbor: String): String
     external fun generateSuiSignRequest(requestId: String, intentMessage: String, accounts: String, origin: String): String
-    // Keystone
-    external fun parseKeystoneSignResult(type: String, cbor: String): String
-    external fun generateKeystoneSignRequest(requestId: String, coinType: Int, signData: String, xfp: String, origin: String, timestamp: Long): String
     // Near
     external fun parseNearSignature(type: String, cbor: String): String
     external fun generateNearSignRequest(requestId: String, signData: String, path: String, xfp: String, account: String, origin: String): String

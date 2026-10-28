@@ -26,20 +26,10 @@ class KeystoneSDK(): KeystoneBaseSDK() {
     val evm: KeystoneEvmSDK by lazy {
         KeystoneEvmSDK()
     }
-    val tron: KeystoneTronSDK by lazy {
-        KeystoneTronSDK()
-    }
+    val tronNative: KeystoneTronNativeSDK by lazy { KeystoneTronNativeSDK() }
+
     val aptos: KeystoneAptosSDK by lazy {
         KeystoneAptosSDK()
-    }
-    val ltc: KeystoneLtcSDK by lazy {
-        KeystoneLtcSDK()
-    }
-    val bch: KeystoneBchSDK by lazy {
-        KeystoneBchSDK()
-    }
-    val dash: KeystoneDashSDK by lazy {
-        KeystoneDashSDK()
     }
     val near: KeystoneNearSDK by lazy {
         KeystoneNearSDK()
